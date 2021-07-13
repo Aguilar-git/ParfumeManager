@@ -24,46 +24,4 @@
   </v-app>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      dialog: true,
-      data: {
-        login: "",
-        password: "",
-      },
-      url: "http://localhost:1337/login",
-    };
-  },
-  methods: {
-    async postData(url, data) {
-      const response = await fetch(url, {
-        method: "POST",
-        mode: "cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      return await response.json();
-    },
-    authorization() {
-      this.postData(this.url, this.data)
-        .then((data) => {
-          console.log(data[0].login);
-          this.success();
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
-    success() {
-      this.$router.push({ name: "Main" });
-    },
-  },
-};
-</script>
-
-<style>
-</style>
+<script src="./Login.js"></script>
