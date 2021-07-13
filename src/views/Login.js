@@ -33,7 +33,7 @@ export default {
                 });
         },
         success() {
-            this.$router.push({ name: "Main" });
+            this.$router.push({ path: "/Main" });
         },
     },
 };

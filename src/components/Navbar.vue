@@ -31,6 +31,11 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
+        <template>
+          <v-btn @click="removeCookie" class="ml-2" icon>
+            <v-icon>mdi-exit-to-app</v-icon>
+          </v-btn>
+        </template>
       </v-list>
     </v-navigation-drawer>
   </nav>
@@ -66,6 +71,12 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    removeCookie() {
+      localStorage.setItem("login", null);
+      console.log(localStorage.getItem("login"));
+    },
   },
 };
 </script>
