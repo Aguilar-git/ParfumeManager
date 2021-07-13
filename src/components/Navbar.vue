@@ -1,11 +1,22 @@
 <template>
   <nav>
+    <!-- <v-toolbar style="z-index: 1" flat app>
+      <v-toolbar-title class="text-uppercase grey--text">
+        <span class="font-weight-light">Max</span>
+        <span>Type</span>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon large>mdi-exit-to-app</v-icon>
+      </v-btn>
+    </v-toolbar> -->
+
     <v-navigation-drawer expand-on-hover app permanent>
       <v-list>
         <v-subheader>
           <v-icon>mdi-menu</v-icon>
         </v-subheader>
-        <v-list-item-group v-model="selectedItem" color="primary">
+        <v-list-item-group color="primary">
           <v-list-item
             v-for="link in links"
             :key="link.text"
@@ -22,16 +33,6 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
-    <!-- <v-toolbar flat app>
-      <v-toolbar-title class="text-uppercase grey--text">
-        <span class="font-weight-light">Max</span>
-        <span>Type</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon large>mdi-exit-to-app</v-icon>
-      </v-btn>
-    </v-toolbar> Не удалять -->
   </nav>
 </template>
 
@@ -49,19 +50,19 @@ export default {
         { icon: "mdi-account-hard-hat", text: "Пропуск", route: "/pass-cards" },
         {
           icon: "mdi-account-cowboy-hat",
-          text: "Рапорт о численом составе",
-          route: "/Staffing-reports",
-        },
-        {
-          icon: "mdi-arm-flex-outline",
-          text: "Рапорт о выполненом обьёме работы",
-          route: "/Scope-of-work",
+          text: "Рапорты",
+          route: "/Reports",
         },
         { icon: "mdi-book-edit-outline", text: "Акты", route: "/Acts" },
         {
           icon: "mdi-alert-decagram-outline",
           text: "Штрафы от АМКР",
           route: "/Fines",
+        },
+        {
+          icon: "mdi-cog-outline",
+          text: "Настройки",
+          route: "/Settings",
         },
       ],
     };

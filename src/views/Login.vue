@@ -6,18 +6,18 @@
         <v-card-text class="mt-5">
           <v-col>
             <v-form>
-              <v-text-field v-model="login" label="Login"></v-text-field>
-              <v-text-field v-model="password" label="Password"> </v-text-field>
+              <v-text-field v-model="data.login" label="Login"></v-text-field>
+              <v-text-field v-model="data.password" label="Password">
+              </v-text-field>
             </v-form>
           </v-col>
         </v-card-text>
 
         <v-divider></v-divider>
 
-        <!-- <v-text-field color="success" loading disabled></v-text-field> -->
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="success">Log In</v-btn>
+          <v-btn color="primary" text @click="authorization">Log In</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -29,11 +29,35 @@ export default {
   data() {
     return {
       dialog: true,
-      login: "",
-      password: "",
+      data: {
+        login: "",
+        password: "",
+      },
+      url: "http://localhost:1337/login",
     };
   },
   methods: {
+    async postData(url, data) {
+      const response = await fetch(url, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      return await response.json();
+    },
+    authorization() {
+      this.postData(this.url, this.data)
+        .then((data) => {
+          console.log(data[0].login);
+          this.success();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     success() {
       this.$router.push({ name: "Main" });
     },

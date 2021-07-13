@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-row justify="center"><h2>StaffingReports</h2></v-row>
+    <v-row justify="center"><h2>Reports</h2></v-row>
   </v-app>
 </template>
 

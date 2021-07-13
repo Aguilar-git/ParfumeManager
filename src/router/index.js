@@ -42,14 +42,14 @@ const routes = [
     component: () => import('../views/Personnel.vue'),
   },
   {
-    path: '/Scope-of-work',
-    name: 'Scope-of-work',
-    component: () => import('../views/ScopeOfWork.vue'),
+    path: '/Reports',
+    name: 'Reports',
+    component: () => import('../views/Reports.vue'),
   },
   {
-    path: '/Staffing-reports',
-    name: 'Staffing-reports',
-    component: () => import('../views/StaffingReports.vue'),
+    path: '/Settings',
+    name: 'Settings',
+    component: () => import('../views/Settings.vue'),
   },
 ]
 
