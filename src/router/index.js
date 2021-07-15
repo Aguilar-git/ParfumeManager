@@ -20,43 +20,43 @@ const routes = [
     path: '/Main',
     name: 'Main',
     component: () => import('../views/Main.vue'),
-    beforeEnter: beforeEnter()
+    // beforeEnter: beforeEnter()
   },
   {
     path: '/Acts',
     name: 'Acts',
     component: () => import('../views/Acts.vue'),
-    beforeEnter: beforeEnter()
+    // beforeEnter: beforeEnter()
   },
   {
     path: '/Fines',
     name: 'Fines',
     component: () => import('../views/Fines.vue'),
-    beforeEnter: beforeEnter()
+    // beforeEnter: beforeEnter()
   },
   {
     path: '/pass-cards',
     name: 'pass-cards',
     component: () => import('../views/PassCards.vue'),
-    beforeEnter: beforeEnter()
+    // beforeEnter: beforeEnter()
   },
   {
     path: '/Personnel',
     name: 'Personnel',
     component: () => import('../views/Personnel.vue'),
-    beforeEnter: beforeEnter()
+    // beforeEnter: beforeEnter()
   },
   {
     path: '/Reports',
     name: 'Reports',
     component: () => import('../views/Reports.vue'),
-    beforeEnter: beforeEnter()
+    // beforeEnter: beforeEnter()
   },
   {
     path: '/Settings',
     name: 'Settings',
     component: () => import('../views/Settings.vue'),
-    beforeEnter: beforeEnter()
+    // beforeEnter: beforeEnter()
   }
 ]
 
@@ -65,23 +65,23 @@ const router = new VueRouter({
   mode: "history"
 });
 
-function beforeEnter(to, from, next) {
-  if (CheckLogin()) {
-    next();
-  } else {
-    next({ name: 'Login' });
-    console.log("redirect");
-  }
-}
+// function beforeEnter(to, from, next) {
+//   if (CheckLogin()) {
+//     next();
+//   } else {
+//     next({ name: 'Login' });
+//     console.log("redirect");
+//   }
+// }
 
-function CheckLogin() {
-  const login = localStorage.getItem("login")
-  console.log(login)
-  if (login != null) {
-    return true;
-  }
-  return false;
-}
+// function CheckLogin() {
+//   const login = localStorage.getItem("login")
+//   console.log(login)
+//   if (login != null) {
+//     return true;
+//   }
+//   return false;
+// }
 
 
 export default router
