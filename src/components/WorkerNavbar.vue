@@ -46,22 +46,11 @@ export default {
       links: [
         { icon: "mdi-home", text: "Главная", route: "/Main" },
         {
-          icon: "mdi-card-account-mail-outline",
-          text: "Кадры",
-          route: "/Personnel",
-        },
-        { icon: "mdi-account-hard-hat", text: "Пропуск", route: "/pass-cards" },
-        {
           icon: "mdi-account-cowboy-hat",
           text: "Рапорты",
           route: "/Reports",
         },
         { icon: "mdi-book-edit-outline", text: "Акты", route: "/Acts" },
-        {
-          icon: "mdi-alert-decagram-outline",
-          text: "Штрафы от АМКР",
-          route: "/Fines",
-        },
         {
           icon: "mdi-cog-outline",
           text: "Настройки",

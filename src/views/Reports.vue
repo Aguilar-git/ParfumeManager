@@ -1,12 +1,20 @@
 <template>
   <v-app>
-    <v-row justify="center"><h2>Reports</h2></v-row>
+    <!-- Таблица с рапортами -->
+    <ReportsTable />
+    <!-- Кнопка добавление рапорта -->
+    <AddReport />
   </v-app>
 </template>
 
 <script>
-export default {};
-</script>
+import ReportsTable from "./../components/ReportsTable.vue";
+import AddReport from "./../components/GeneratingReports.vue";
 
-<style>
-</style>
+export default {
+  components: {
+    ReportsTable,
+    AddReport,
+  },
+};
+</script>

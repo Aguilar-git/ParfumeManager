@@ -9,6 +9,7 @@
 <script>
 import AuthLayout from "./layouts/AuthorizationLayout.vue";
 import DefaultLayout from "./layouts/DefaultLayout.vue";
+import WorkerLayout from "./layouts/WorkerLayout.vue";
 
 export default {
   name: "App",
@@ -20,6 +21,7 @@ export default {
   components: {
     AuthLayout,
     DefaultLayout,
+    WorkerLayout,
   },
 };
 </script>

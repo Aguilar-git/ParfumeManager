@@ -20,43 +20,46 @@ const routes = [
     path: '/Main',
     name: 'Main',
     component: () => import('../views/Main.vue'),
-    // beforeEnter: beforeEnter()
+    meta: {
+      layout: 'worker-layout'
+    }
   },
   {
     path: '/Acts',
     name: 'Acts',
     component: () => import('../views/Acts.vue'),
-    // beforeEnter: beforeEnter()
+    meta: {
+      layout: 'worker-layout'
+    }
   },
   {
     path: '/Fines',
     name: 'Fines',
     component: () => import('../views/Fines.vue'),
-    // beforeEnter: beforeEnter()
   },
   {
     path: '/pass-cards',
     name: 'pass-cards',
     component: () => import('../views/PassCards.vue'),
-    // beforeEnter: beforeEnter()
   },
   {
     path: '/Personnel',
     name: 'Personnel',
     component: () => import('../views/Personnel.vue'),
-    // beforeEnter: beforeEnter()
   },
   {
     path: '/Reports',
     name: 'Reports',
     component: () => import('../views/Reports.vue'),
-    // beforeEnter: beforeEnter()
+    meta: {
+      layout: 'worker-layout'
+    }
   },
   {
     path: '/Settings',
     name: 'Settings',
     component: () => import('../views/Settings.vue'),
-    // beforeEnter: beforeEnter()
+
   }
 ]
 
