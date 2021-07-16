@@ -33,13 +33,8 @@ const routes = [
     }
   },
   {
-    path: '/Fines',
-    name: 'Fines',
-    component: () => import('../views/Fines.vue'),
-  },
-  {
     path: '/pass-cards',
-    name: 'pass-cards',
+    name: 'PassCards',
     component: () => import('../views/PassCards.vue'),
   },
   {
@@ -68,23 +63,10 @@ const router = new VueRouter({
   mode: "history"
 });
 
-// function beforeEnter(to, from, next) {
-//   if (CheckLogin()) {
+// router.beforeEach((to, from, next) => {
+//   if (to.name === "Login" && ) {
 //     next();
-//   } else {
-//     next({ name: 'Login' });
-//     console.log("redirect");
 //   }
-// }
-
-// function CheckLogin() {
-//   const login = localStorage.getItem("login")
-//   console.log(login)
-//   if (login != null) {
-//     return true;
-//   }
-//   return false;
-// }
-
+// });
 
 export default router
