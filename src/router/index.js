@@ -17,38 +17,9 @@ const routes = [
     }
   },
   {
-    path: '/Main',
-    name: 'Main',
-    component: () => import('../views/Main.vue'),
-    meta: {
-      layout: 'worker-layout'
-    }
-  },
-  {
-    path: '/Acts',
-    name: 'Acts',
-    component: () => import('../views/Acts.vue'),
-    meta: {
-      layout: 'worker-layout'
-    }
-  },
-  {
-    path: '/pass-cards',
-    name: 'PassCards',
-    component: () => import('../views/PassCards.vue'),
-  },
-  {
-    path: '/Personnel',
-    name: 'Personnel',
-    component: () => import('../views/Personnel.vue'),
-  },
-  {
-    path: '/Reports',
-    name: 'Reports',
-    component: () => import('../views/Reports.vue'),
-    meta: {
-      layout: 'worker-layout'
-    }
+    path: '/Procurement',
+    name: 'Procurement',
+    component: () => import('../views/Procurement.vue'),
   },
   {
     path: '/Settings',

@@ -9,47 +9,71 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// Находит пользователя по паролю
+// Находит пользоватля по логину и паролю
 app.post("/login", async (req, res) => {
-    const foundUser = await db.GetLogin(req.body);
-    res.status(200).json(foundUser);
+    const foundUser = await db.GetUser(req.body)
+
+    if (foundUser != undefined) {
+        res.status(200).json(foundUser);
+    } else {
+        res.status(401);
+    }
 });
 
-// Возвращает всю информацию о пользователях
-app.get("/users", async (req, res) => {
-    const users = await db.GetUsers();
-    res.status(200).json(users);
+// Добавляет новый продукт
+// app.post("/add-product", async (req, res) => {
+
+// });
+
+// Возвращает список продуктов
+app.get("/products", async (req, res) => {
+    const products = await db.GetPoroducts();
+
+    res.status(200).json(products);
 });
 
-// Возвращает URL фото всех пользователей
-app.get("/users-photo", async (req, res) => {
-    const usersPhoto = await db.GetUsersPhoto();
-    res.status(200).json(usersPhoto);
+// Возвращает список компаний
+app.get("/companies", async (req, res) => {
+    const сompanies = await db.GetCompanies();
+
+    res.status(200).json(сompanies);
 });
 
-// Возвращает URL фото пользователя по id
-app.get("/user/:id", async (req, res) => {
-    const photoURL = await db.GetUserPhoto(req.params.id);
-    res.status(200).json(photoURL);
+// Возвращает список ароматов
+app.get("/fragrants", async (req, res) => {
+    const fragrant = await db.GetFragrants();
+
+    res.status(200).json(fragrant);
 });
 
-// Архивирование пользователя
-app.post("/user-archiving/:id", async (req, res) => {
-    const isOK = await db.UserArchiving(req.params.id);
-    res.status(200).json(isOK);
+// Возвращает историю максимальных объёмов
+app.get("/max-volumes", async (req, res) => {
+    const maxVolumes = await db.GetMaxVolumes();
+
+    res.status(200).json(maxVolumes);
 });
 
-// Разрхивирование пользователя
-app.post("/unzip-user/:id", async (req, res) => {
-    const isOK = await db.UnzipAUser(req.params.id);
-    res.status(200).json(isOK);
+// Возвращает список концентраций
+app.get("/concentrations", async (req, res) => {
+    const concentrations = await db.GetConcentrations();
+
+    res.status(200).json(concentrations);
 });
 
-// Редактирование пользователя
-app.post("/user-editing", async (req, res) => {
-    const isOK = await db.EditUser(req.body);
-    res.status(200).json(isOK);
-});
+
+
+
+
+
+// app.post("/registration", async (req, res) => {
+//     const user = await db.GetUser(req.body)
+
+//     if (user != undefined) {
+//         res.status(200).json(user);
+//     } else {
+//         res.status(401);
+//     }
+// });
 
 
 

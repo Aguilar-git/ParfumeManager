@@ -1,7 +1,7 @@
 <template>
   <v-app class="grey lighten-4">
     <Navbar />
-    <v-main>
+    <v-main class="pt-10">
       <router-view />
     </v-main>
   </v-app>
@@ -11,7 +11,7 @@
 import Navbar from "@/components/Navbar.vue";
 
 export default {
-  name: "default-layout",
+  name: "worker-layout",
   components: { Navbar },
 };
 </script>

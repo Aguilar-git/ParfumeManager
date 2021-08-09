@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import ReportsTable from "./../components/ReportsTable.vue";
-import AddReport from "./../components/GeneratingReports.vue";
+import ReportsTable from "../components/ProductsTable.vue";
+import AddReport from "../components/GeneratingProduct/GeneratingProduct.vue";
 
 export default {
   components: {

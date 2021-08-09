@@ -2,7 +2,7 @@ export default {
     data() {
         return {
             dialog: true,
-            url: "http://localhost:1337/login",
+            loginUrl: "http://localhost:1337/login",
             data: {
                 login: "",
                 password: "",
@@ -10,8 +10,8 @@ export default {
         };
     },
     methods: {
-        async postData(url, data) {
-            const response = await fetch(url, {
+        async postData(loginUrl, data) {
+            const response = await fetch(loginUrl, {
                 method: "POST",
                 mode: "cors",
                 headers: {
@@ -22,18 +22,18 @@ export default {
             return await response.json();
         },
         authorization() {
-            this.postData(this.url, this.data)
+            this.postData(this.loginUrl, this.data)
                 .then((data) => {
-                    // console.log(data[0].login);
-                    localStorage.setItem("login", data[0].login)
+                    console.log(data[0].login);
+                    localStorage.setItem("login", data[0].login);
                     this.success();
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(() => {
+                    console.log("Ошибка");
                 });
         },
         success() {
-            this.$router.push({ path: "/Main" });
+            this.$router.push({ path: "/Procurement" });
         },
     },
 };
