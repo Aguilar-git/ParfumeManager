@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <component :is="layout" class="mr-5 mt-2">
+    <component :is="layout" class="mt-2">
       <vue-extend-layouts />
     </component>
   </v-app>

@@ -60,11 +60,16 @@ app.get("/concentrations", async (req, res) => {
     res.status(200).json(concentrations);
 });
 
+// Добавление продукта
+app.post("/add-product", async (req, res) => {
+    const result = await db.AddProduct(req.body);
+
+    res.status(200).json(result);
+});
 
 
 
-
-
+// Регистрация
 // app.post("/registration", async (req, res) => {
 //     const user = await db.GetUser(req.body)
 

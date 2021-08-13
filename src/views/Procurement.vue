@@ -1,20 +1,20 @@
 <template>
   <v-app>
-    <!-- Таблица с рапортами -->
-    <ReportsTable />
-    <!-- Кнопка добавление рапорта -->
-    <AddReport />
+    <!-- Таблица с продуктами -->
+    <ProductsTable />
+    <!-- Кнопка добавление продукта -->
+    <AddProduct />
   </v-app>
 </template>
 
 <script>
-import ReportsTable from "../components/ProductsTable.vue";
-import AddReport from "../components/GeneratingProduct/GeneratingProduct.vue";
+import ProductsTable from "../components/ProductsTable/ProductsTable.vue";
+import AddProduct from "../components/GeneratingProduct/GeneratingProduct.vue";
 
 export default {
   components: {
-    ReportsTable,
-    AddReport,
+    ProductsTable,
+    AddProduct,
   },
 };
 </script>

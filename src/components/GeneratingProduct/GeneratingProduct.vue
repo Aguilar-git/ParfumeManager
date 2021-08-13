@@ -163,6 +163,3 @@
 </template>
 
 <script src="./GeneratingProduct.js"></script>
-
-<style>
-</style>
