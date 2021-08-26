@@ -21,15 +21,13 @@ export default {
             });
             return await response.json();
         },
-        authorization() {
+        logIn() {
             this.postData(this.loginUrl, this.data)
-                .then((data) => {
-                    console.log(data[0].login);
-                    localStorage.setItem("login", data[0].login);
+                .then(() => {
                     this.success();
                 })
                 .catch(() => {
-                    console.log("Ошибка");
+                    console.log("Ошибка авторизации. Неправельный логин или пароль.");
                 });
         },
         success() {

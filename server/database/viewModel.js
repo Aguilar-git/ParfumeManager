@@ -1,13 +1,37 @@
-const knex = require("./knex");
+const knex = require("./knex")
+const argon2 = require("argon2")
 
-function GetUser(user) {
-    if (user.login != undefined && user.password != undefined) {
-        return knex("Users").where({
-            login: user.login,
-            password: user.password
-        }).select("login");
+function GetUserByName(login) {
+    if (login !== undefined) {
+        return knex("Users").where('login', login).select('id');
     }
-    else return undefined;
+    return null;
+}
+
+async function Login(login, password) {
+    const foundUser = await knex("Users").where("login", login).select("password");
+    if (foundUser.length > 0) {
+        const correctPassword = await argon2.verify(foundUser[0].password, password);
+
+        return correctPassword;
+    }
+    return false;
+}
+
+async function CreateUser(user) {
+    const foundUser = await GetUserByName(user.login);
+
+    if (foundUser.length === 0) {
+        const passwordHashed = await argon2.hash(user.password);
+
+        return knex("Users").insert({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            login: user.login,
+            password: passwordHashed
+        });
+    }
+    return [];
 }
 
 function GetPoroducts() {
@@ -49,96 +73,100 @@ function GetMaxVolumes() {
 //     "concentrationName": "Духи",
 //     "companyName": "V Canto"
 // }
-async function AddProduct(product) {
+// async function AddProduct(product) {
 
-    // Проверка на наличие концентрации в БД, создание записи при её отсутствии 
-    let fragrantId = await this.GetFragrantByName(product.fragrantName, product.companyName);
+//     // Проверка на наличие концентрации в БД, создание записи при её отсутствии 
+//     let fragrantId = await this.GetFragrantByIds(product.fragrantId, product.companyId);
 
-    console.log("fragrantId.length:");
-    console.log(fragrantId.length);
+//     console.log("fragrantId.length:");
+//     console.log(fragrantId.length);
 
-    if (fragrantId.length > 0) {
-        product.fragrantId = fragrantId[0].id;
-    }
-    else {
-        let concentrationId = await this.GetConcentrationByName(product.concentrationName);
-        if (concentrationId.length > 0) {
-            product.concentrationId = concentrationId[0].id;
-        }
-        else {
-            await this.AddConcentration(product.concentrationName);
-            concentrationId = await this.GetConcentrationByName(product.concentrationName);
-            product.concentrationId = concentrationId[0].id;
-        }
+//     if (fragrantId.length > 0) {
+//         product.fragrantId = fragrantId[0].id;
+//     }
+//     else {
+//         // Проверка на наличие концентрации в БД, создание записи при её отсутствии 
+//         let concentrationId = await this.GetConcentrationByName(product.concentrationName);
+//         if (concentrationId.length > 0) {
+//             product.concentrationId = concentrationId[0].id;
+//         }
+//         else {
+//             await this.AddConcentration(product.concentrationName);
+//             concentrationId = await this.GetConcentrationByName(product.concentrationName);
+//             product.concentrationId = concentrationId[0].id;
+//         }
 
-        // Проверка на наличие компании в БД, создание записи при её отсутствии 
-        let companyId = await this.GetCompanyByName(product.companyName);
+//         // Проверка на наличие компании в БД, создание записи при её отсутствии 
+//         let companyId = await this.GetCompanyByName(product.companyName);
 
-        console.log("companyId.length:");
-        console.log(companyId.length);
-        console.log(companyId);
+//         console.log("companyId.length:");
+//         console.log(companyId.length);
+//         console.log(companyId);
 
-        if (companyId.length > 0) {
-            product.companyId = companyId[0].id;
-        }
-        else {
-            await AddCompany(product.companyName);
-            companyId = await this.GetCompanyByName(product.companyName);
-            product.companyId = companyId[0].id;
-        }
+//         if (companyId.length > 0) {
+//             product.companyId = companyId[0].id;
+//         }
+//         else {
+//             await AddCompany(product.companyName);
+//             companyId = await this.GetCompanyByName(product.companyName);
 
-        // Проверка на наличие максимального обьёма в БД, создание записи при её отсутствии 
-        let maxVolumeId = await this.GetMaxVolumeByValue(product.maxVolumeValue);
+//             product.companyId = companyId[0].id;
+//         }
 
-        console.log("maxVolumeId.length:");
-        console.log(maxVolumeId.length);
+//         // Проверка на наличие максимального обьёма в БД, создание записи при её отсутствии 
+//         let maxVolumeId = await this.GetMaxVolumeByValue(product.maxVolumeValue);
 
-        if (maxVolumeId.length > 0) {
-            product.maxVolumeId = maxVolumeId[0].id;
-        }
-        else {
-            await this.AddMaxVolume(product.maxVolumeValue);
-            maxVolumeId = await this.GetMaxVolumeByValue(product.maxVolumeValue);
-            product.maxVolumeId = maxVolumeId[0].id;
-        }
+//         console.log("maxVolumeId.length:");
+//         console.log(maxVolumeId.length);
 
-        // Проверка на наличие аромата в БД, создание записи при её отсутствии 
-        await this.AddFragrant({
-            name: product.fragrantName,
-            concentrationId: product.concentrationId,
-            companyId: product.companyId
-        });
+//         if (maxVolumeId.length > 0) {
+//             product.maxVolumeId = maxVolumeId[0].id;
+//         }
+//         else {
+//             await this.AddMaxVolume(product.maxVolumeValue);
+//             maxVolumeId = await this.GetMaxVolumeByValue(product.maxVolumeValue);
+//             product.maxVolumeId = maxVolumeId[0].id;
+//         }
 
-        fragrantId = await this.GetFragrantByName(product.fragrantName, product.companyName);
-        product.fragrantId = fragrantId[0].id;
-    }
+//         // Проверка на наличие аромата в БД, создание записи при её отсутствии 
+//         await this.AddFragrant({
+//             name: product.fragrantName,
+//             concentrationId: product.concentrationId,
+//             companyId: product.companyId
+//         });
 
-    // Добавление продукта
-    return knex('Products').insert({
-        purchaseVolume: product.purchaseVolume,
-        actualVolume: product.actualVolume,
-        buy: product.buy,
-        sellPerMilliliter: product.sellPerMilliliter,
-        dateBuy: product.dateBuy,
-        userId: product.userId,
-        maxVolumeId: product.maxVolumeId,
-        fragrantId: product.fragrantId
-    });
+//         fragrantId = await GetFragrantByIds(product.fragrantId, product.companyId);
+
+//         console.log("fragrantId:");
+//         console.log(fragrantId);
 
 
-}
+//         product.fragrantId = fragrantId[0].id;
+//     }
+
+//     // Добавление продукта
+//     return knex('Products').insert({
+//         purchaseVolume: product.purchaseVolume,
+//         actualVolume: product.actualVolume,
+//         buy: product.buy,
+//         sellPerMilliliter: product.sellPerMilliliter,
+//         dateBuy: product.dateBuy,
+//         userId: product.userId,
+//         maxVolumeId: product.maxVolumeId,
+//         fragrantId: product.fragrantId
+//     });
+// }
 
 // Поиск полей по имени
 function GetCompanyByName(name) {
     return knex('Companies').select('id').where("companyName", name);
 }
 
-function GetFragrantByName(fragrName, concName) {
+function GetFragrantByIds(fragrId, concId) {
     return knex('Fragrants').where({
-        fragrantName: fragrName,
-        concentrationName: concName
-    }).select('Fragrants.id')
-        .join('Concentrations', 'Fragrants.concentrationId', 'Concentrations.id')
+        fragrantName: fragrId,
+        concentrationName: concId
+    }).select('Fragrants.id');
 
 }
 
@@ -171,23 +199,23 @@ function AddConcentration(name) {
 function AddMaxVolume(name) {
     return knex('MaxVolumes').insert({ volumeValue: name });
 }
-//
 
 
 module.exports = {
-    GetUser,
+    Login,
     GetPoroducts,
     GetCompanies,
     GetFragrants,
     GetConcentrations,
     GetMaxVolumes,
     GetCompanyByName,
-    GetFragrantByName,
+    GetFragrantByIds,
     GetConcentrationByName,
     GetMaxVolumeByValue,
     AddCompany,
     AddFragrant,
     AddConcentration,
     AddMaxVolume,
-    AddProduct
+    // AddProduct,
+    CreateUser
 }

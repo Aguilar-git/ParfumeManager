@@ -6,9 +6,10 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server/server.js"
+    "start": "nodemon server/server.js"
   },
   "dependencies": {
+    "argon2": "^0.28.2",
     "core-js": "^3.6.5",
     "cors": "^2.8.5",
     "eslint-plugin-vue": "^7.16.0",

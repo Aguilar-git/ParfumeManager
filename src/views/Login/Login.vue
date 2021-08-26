@@ -17,7 +17,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="authorization">Log In</v-btn>
+          <v-btn color="primary" text @click="logIn">Log In</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

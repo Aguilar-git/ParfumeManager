@@ -3,10 +3,10 @@ export default {
         return {
             dialog: false,
             urls: {
-                urlCompany: "http://localhost:1337/companies",
-                urlFragrant: "http://localhost:1337/fragrants",
-                urlMaxVolume: "http://localhost:1337/max-volumes",
-                urlConcentration: "http://localhost:1337/concentrations",
+                urlCompany: "http://localhost:1337/product/companies",
+                urlFragrant: "http://localhost:1337/product/fragrants",
+                urlMaxVolume: "http://localhost:1337/product/max-volumes",
+                urlConcentration: "http://localhost:1337/product/concentrations",
             },
             lists: {
                 companies: [],
