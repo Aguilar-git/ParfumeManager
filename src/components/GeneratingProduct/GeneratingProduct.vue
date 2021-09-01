@@ -45,6 +45,7 @@
                       <v-combobox
                         label="Компания производитель"
                         :items="lists.companies"
+                        v-model="product.companyName"
                         dense
                       ></v-combobox>
                     </v-col>
@@ -54,6 +55,7 @@
                       <v-combobox
                         label="Название аромата"
                         :items="lists.fragrants"
+                        v-model="product.fragrantName"
                         dense
                       ></v-combobox>
                     </v-col>
@@ -63,6 +65,7 @@
                       <v-combobox
                         label="Концентрация"
                         :items="lists.concentrations"
+                        v-model="product.concentrationName"
                         dense
                       ></v-combobox>
                     </v-col>
@@ -86,12 +89,14 @@
                       <v-combobox
                         label="Максимальный объём флакона"
                         :items="lists.maxVolumes"
+                        v-model="product.maxVolumeValue"
                         dense
                       ></v-combobox>
                     </v-col>
                     <v-col>
                       <v-text-field
                         label="Фактический объём флакона"
+                        v-model="product.purchaseVolume"
                         dense
                       ></v-text-field>
                     </v-col>
@@ -101,7 +106,7 @@
                       <v-text-field
                         label="Цена покупки"
                         dense
-                        v-model="this.product.buy"
+                        v-model="product.buy"
                       ></v-text-field>
                     </v-col>
                     <v-col>
@@ -121,7 +126,7 @@
                       <v-text-field
                         label="Цена продажи за миллилитр"
                         dense
-                        v-model="this.product.sellPerMilliliter"
+                        v-model="product.sellPerMilliliter"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -151,7 +156,7 @@
               <v-btn color="grey darken-2" text @click="step = 2">
                 Назад
               </v-btn>
-              <v-btn color="green darken-1" text @click="dialog = false">
+              <v-btn color="green darken-1" text @click="CreateProduct">
                 Отправить
               </v-btn>
             </v-stepper-content>
