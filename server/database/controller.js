@@ -40,7 +40,7 @@ async function CreateUser(user) {
   return [];
 }
 
-function GetPoroducts() {
+function GetPoroducts(userId) {
   return knex("Products")
     .join("MaxVolumes", "MaxVolumes.id", "Products.maxVolumeId")
     .join("Fragrants", "Fragrants.id", "Products.fragrantId")
@@ -56,7 +56,8 @@ function GetPoroducts() {
       { volume: "MaxVolumes.volumeValue" },
       { fragrant: "Fragrants.fragrantName" },
       { company: "Companies.companyName" }
-    );
+    )
+    .where("Products.userId", userId);
 }
 
 function GetCompanies() {
@@ -212,6 +213,12 @@ function GetMaxVolumeByValue(value) {
     .where("volumeValue", value);
 }
 
+function DeleteProduct(id) {
+  return knex("Products")
+    .where("id", id)
+    .del();
+}
+
 module.exports = {
   Login,
   GetPoroducts,
@@ -221,4 +228,5 @@ module.exports = {
   GetMaxVolumes,
   CreateProduct,
   CreateUser,
+  DeleteProduct,
 };

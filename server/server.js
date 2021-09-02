@@ -24,75 +24,71 @@ app.post("/login", async (req, res) => {
 });
 
 app.post("/registration", async (req, res) => {
-  const result = await db.CreateUser(req.body);
+  try {
+    const result = await db.CreateUser(req.body);
 
-  res.status(201).json(result);
+    res.status(201).json(result);
+  } catch (error) {
+    res.status(400).send();
+  }
 });
 
 // Возвращает список продуктов
-app.get("/products", async (req, res) => {
-  const products = await db.GetPoroducts();
+app.post("/products", async (req, res) => {
+  try {
+    const products = await db.GetPoroducts(req.body.userId);
 
-  res.status(200).json(products);
+    res.json(products);
+  } catch (error) {
+    res.status(400).send();
+  }
 });
 
 // Возвращает список компаний
 app.get("/product/companies", async (req, res) => {
   const сompanies = await db.GetCompanies();
 
-  res.status(200).json(сompanies);
+  res.json(сompanies);
 });
 
 // Возвращает список ароматов
 app.get("/product/fragrants", async (req, res) => {
   const fragrant = await db.GetFragrants();
 
-  res.status(200).json(fragrant);
+  res.json(fragrant);
 });
 
 // Возвращает историю максимальных объёмов
 app.get("/product/max-volumes", async (req, res) => {
   const maxVolumes = await db.GetMaxVolumes();
 
-  res.status(200).json(maxVolumes);
+  res.json(maxVolumes);
 });
 
 // Возвращает список концентраций
 app.get("/product/concentrations", async (req, res) => {
   const concentrations = await db.GetConcentrations();
 
-  res.status(200).json(concentrations);
+  res.json(concentrations);
 });
 
 // Добавление нового продукта
 app.post("/product/create", async (req, res) => {
   try {
     const result = await db.CreateProduct(req.body);
-    res.status(200).json(result);
+    res.json(result);
   } catch (error) {
     res.status(400).send();
   }
 });
 
-///////////////////////////////
-
-// app.get("/test/GetMaxVolumeByValue", async (req, res) => {
-//   try {
-//     const result = await db.GetMaxVolumeByValue(req.query.value);
-
-//     res.status(200).json(result);
-//   } catch (error) {
-//     res.status(400).send();
-//   }
-// });
-
-// app.post("/test/AddFragrant", async (req, res) => {
-//   try {
-//     const result = await db.AddFragrant(req.body);
-//     res.status(200).json(result);
-//   } catch (error) {
-//     res.status(400).send();
-//   }
-// });
+app.delete("/product/delete/:id", async (req, res) => {
+  try {
+    await db.DeleteProduct(req.params.id);
+    res.status(200).send();
+  } catch (error) {
+    res.status(400).send();
+  }
+});
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));

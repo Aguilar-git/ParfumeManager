@@ -142,8 +142,8 @@
             </v-stepper-content>
 
             <v-stepper-content step="3">
-              <v-card class="pt-3 pb-3" flat>
-                <v-row style="height: 400px" justify="center">
+              <v-card class="pb-3" flat>
+                <v-row style="height: 360px" justify="center">
                   <v-col>
                     <v-date-picker
                       full-width

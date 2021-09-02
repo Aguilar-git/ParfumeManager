@@ -32,8 +32,8 @@
       app
     >
       <v-toolbar-title class="text-uppercase grey--text">
-        <span class="font-weight-light">Max</span>
-        <span>Type</span>
+        <span>local</span>
+        <span class="font-weight-light">host</span>
       </v-toolbar-title>
     </v-app-bar>
   </nav>
@@ -62,12 +62,6 @@ export default {
         },
       ],
     };
-  },
-  methods: {
-    removeCookie() {
-      localStorage.setItem("login", null);
-      console.log(localStorage.getItem("login"));
-    },
   },
 };
 </script>
