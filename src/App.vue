@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import AuthLayout from "./layouts/AuthorizationLayout.vue";
-import DefaultLayout from "./layouts/DefaultLayout.vue";
+import AuthLayout from "./layouts/authorizationLayout";
+import DefaultLayout from "./layouts/defaultLayout";
 
 export default {
   name: "App",

@@ -1,4 +1,11 @@
+import SellDialog from "./sellDialog/generatingSell.vue";
+import DeleteDialog from "./deleteDialog/deleteProduct.vue";
+
 export default {
+  components: {
+    SellDialog,
+    DeleteDialog,
+  },
   data() {
     return {
       table: {
@@ -9,13 +16,18 @@ export default {
           { text: "Действия", value: "actions", sortable: false },
         ],
         data: [],
-        selectedItem: Object,
+        selectedItem: {},
       },
       urlGetProducts: "http://localhost:1337/products",
       urlDeleteProduct: "http://localhost:1337/product/delete/",
       dialog: false,
       info_dialog: false,
       delete_dialog: false,
+      sell_dialog: false,
+      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+        .toISOString()
+        .substr(0, 10),
+      dateTimePickerMenu: false,
     };
   },
   async mounted() {
@@ -43,20 +55,38 @@ export default {
       });
     },
 
+    openSellDialog(item) {
+      this.table.selectedItem = item;
+      this.sell_dialog = true;
+    },
+    closeSellDialog() {
+      this.sell_dialog = false;
+    },
     infoDialog(item) {
       this.table.selectedItem = item;
       this.info_dialog = true;
     },
-    deleteDialog(item) {
+    openDelDialog(item) {
       this.table.selectedItem = item;
       this.delete_dialog = true;
     },
-
-    deleteProduct() {
-      fetch(this.urlDeleteProduct + this.table.selectedItem.id, {
-        method: "DELETE",
-      }).then(() => this.TableInitialization());
+    closeDelDialog() {
       this.delete_dialog = false;
+    },
+
+    async deleteProduct() {
+      await fetch(this.urlDeleteProduct + this.table.selectedItem.id, {
+        method: "DELETE",
+      });
+      this.delete_dialog = false;
+    },
+  },
+  watch: {
+    delete_dialog: function(dialog) {
+      if (!dialog) {
+        console.log(dialog);
+        this.TableInitialization();
+      }
     },
   },
 };

@@ -8,13 +8,10 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
+import Navbar from "@/components/navbar.vue";
 
 export default {
   name: "worker-layout",
   components: { Navbar },
 };
 </script>
-
-<style scoped>
-</style>

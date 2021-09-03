@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import ProductsTable from "../components/ProductsTable/ProductsTable.vue";
-import AddProduct from "../components/GeneratingProduct/GeneratingProduct.vue";
+import AddProduct from "../components/GeneratingProduct/generatingProduct.vue";
+import ProductsTable from "../components/ProductsTable/productsTable.vue";
 
 export default {
   components: {

@@ -167,4 +167,4 @@
   </v-row>
 </template>
 
-<script src="./GeneratingProduct.js"></script>
+<script src="./generatingProduct.js"></script>
