@@ -28,32 +28,27 @@
     <SellDialog
       :item="table.selectedItem"
       :dialog="sell_dialog"
-      :closeFunction="closeSellDialog"
+      @close-dialog="closeSellDialog"
     ></SellDialog>
 
     <!-- Delete dialog -->
     <DeleteDialog
       :item="table.selectedItem"
       :dialog="delete_dialog"
-      :closeFunction="closeDelDialog"
-      :deleteFunction="deleteProduct"
+      @delete-product="deleteProduct"
+      @close-dialog="closeDelDialog"
     ></DeleteDialog>
 
     <!-- Info dialog -->
-    <v-dialog v-model="info_dialog" width="600">
-      <v-card>
-        <v-card-title>
-          {{ table.selectedItem.name }}
-        </v-card-title>
-        <v-card-text> Описание </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn text color="green darken-1" @click="info_dialog = false"
-            >Закрыть</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
+
+    <InfoDialog
+      :item="table.selectedItem"
+      :dialog="info_dialog"
+      @close-dialog="info_dialog = false"
+    />
+
+    <!-- Кнопка добавление продукта -->
+    <AddProduct @update-table="TableInitialization" />
   </v-app>
 </template>
 

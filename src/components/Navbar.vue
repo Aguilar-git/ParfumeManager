@@ -25,7 +25,10 @@
     </v-navigation-drawer>
 
     <v-app-bar
-      style="background: white; border-bottom: 1px solid rgba(0, 0, 0, 0.12)"
+      style="
+        background-color: white;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      "
       height="49"
       dense
       flat

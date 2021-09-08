@@ -1,37 +1,44 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '*',
-    redirect: '/Login'
+    path: "*",
+    redirect: "/Login",
   },
   {
-    path: '/Login',
-    name: 'Login',
-    component: () => import('../views/Login/Login.vue'),
+    path: "/Login",
+    name: "Login",
+    component: () => import("../views/login/login.vue"),
     meta: {
-      layout: 'auth-layout'
-    }
+      layout: "auth-layout",
+    },
   },
   {
-    path: '/Procurement',
-    name: 'Procurement',
-    component: () => import('../views/Procurement.vue'),
+    path: "/Registration",
+    name: "Registration",
+    component: () => import("../views/registration/registration.vue"),
+    meta: {
+      layout: "auth-layout",
+    },
   },
   {
-    path: '/Settings',
-    name: 'Settings',
-    component: () => import('../views/Settings.vue'),
-
-  }
-]
+    path: "/Procurement",
+    name: "Procurement",
+    component: () => import("../views/Procurement.vue"),
+  },
+  {
+    path: "/Settings",
+    name: "Settings",
+    component: () => import("../views/Settings.vue"),
+  },
+];
 
 const router = new VueRouter({
   routes,
-  mode: "history"
+  mode: "history",
 });
 
 // router.beforeEach((to, from, next) => {
@@ -40,4 +47,4 @@ const router = new VueRouter({
 //   }
 // });
 
-export default router
+export default router;

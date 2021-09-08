@@ -12,10 +12,10 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn text color="green darken-1" @click="closeFunction">
+          <v-btn text color="green darken-1" @click="$emit('close-dialog')">
             Отмена
           </v-btn>
-          <v-btn text color="red lighten-1" @click="deleteFunction">
+          <v-btn text color="red lighten-1" @click="$emit('delete-product')">
             Удалить
           </v-btn>
         </v-card-actions>

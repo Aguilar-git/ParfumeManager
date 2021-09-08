@@ -1,8 +1,12 @@
 import SellDialog from "./sellDialog/generatingSell.vue";
 import DeleteDialog from "./deleteDialog/deleteProduct.vue";
+import InfoDialog from "./infoDialog/infoAboutProduct.vue";
+import AddProduct from "./buyDialog/generatingProduct.vue";
 
 export default {
   components: {
+    AddProduct,
+    InfoDialog,
     SellDialog,
     DeleteDialog,
   },

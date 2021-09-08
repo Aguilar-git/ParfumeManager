@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     async CreateProduct() {
-      console.log(this.product);
       await fetch(this.urls.CreateProduct, {
         method: "POST",
         headers: {
@@ -44,6 +43,7 @@ export default {
       }).then(() => {
         this.dialog = false;
       });
+      this.$emit("update-table");
     },
 
     async GetData(url) {
