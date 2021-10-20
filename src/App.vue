@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import AuthLayout from "./layouts/authorizationLayout";
-import DefaultLayout from "./layouts/defaultLayout";
+import AuthLayout from "./layouts/AuthorizationLayout";
+import DefaultLayout from "./layouts/DefaultLayout";
 
 export default {
   name: "App",

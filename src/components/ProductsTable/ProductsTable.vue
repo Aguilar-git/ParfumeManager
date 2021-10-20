@@ -52,5 +52,5 @@
   </v-app>
 </template>
 
-<script src="./productsTable.js">
+<script src="./ProductsTable.js">
 </script>

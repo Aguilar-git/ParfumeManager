@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import ProductsTable from "../components/ProductsTable/productsTable.vue";
+import ProductsTable from "../components/ProductsTable/ProductsTable.vue";
 
 export default {
   components: {

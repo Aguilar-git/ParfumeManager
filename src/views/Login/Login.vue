@@ -30,4 +30,4 @@
   </v-app>
 </template>
 
-<script src="./login.js"></script>
+<script src="./Login.js"></script>
