@@ -2,8 +2,10 @@ import SellDialog from "./sellDialog/generatingSell.vue";
 import DeleteDialog from "./deleteDialog/deleteProduct.vue";
 import InfoDialog from "./infoDialog/infoAboutProduct.vue";
 import AddProduct from "./buyDialog/generatingProduct.vue";
+// import Fetch from "../../../controllers/Fetch.js";
 
 export default {
+
   components: {
     AddProduct,
     InfoDialog,
@@ -29,8 +31,8 @@ export default {
       delete_dialog: false,
       sell_dialog: false,
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+          .toISOString()
+          .substr(0, 10),
       dateTimePickerMenu: false,
     };
   },

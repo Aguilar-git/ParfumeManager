@@ -12,7 +12,7 @@ export default {
     };
   },
   methods: {
-    async postData(loginUrl, data) {
+    async send(loginUrl, data) {
       const response = await fetch(loginUrl, {
         method: "POST",
         mode: "cors",
@@ -24,7 +24,7 @@ export default {
       return await response;
     },
     async logIn() {
-      const userId = await this.postData(
+      const userId = await this.send(
         this.loginUrl,
         this.data
       ).catch(() => {});
