@@ -2,7 +2,7 @@ import SellDialog from "./sellDialog/generatingSell.vue";
 import DeleteDialog from "./deleteDialog/deleteProduct.vue";
 import InfoDialog from "./infoDialog/infoAboutProduct.vue";
 import AddProduct from "./buyDialog/generatingProduct.vue";
-// import Fetch from "../../../controllers/Fetch.js";
+import query from "../../models/Fetch.js";
 
 export default {
 
@@ -24,9 +24,10 @@ export default {
         data: [],
         selectedItem: {},
       },
-      urlGetProducts: "http://localhost:1337/products",
-      urlDeleteProduct: "http://localhost:1337/product/delete/",
-      dialog: false,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // dialog: false,
       info_dialog: false,
       delete_dialog: false,
       sell_dialog: false,
@@ -36,23 +37,25 @@ export default {
       dateTimePickerMenu: false,
     };
   },
+
   async mounted() {
     await this.TableInitialization();
   },
+
   methods: {
-    async GetProducts() {
-      let products = await fetch(this.urlGetProducts, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: localStorage.getItem("userId") }),
-      }).then((result) => result.json());
-      return products;
+    async getProducts() {
+      return await query._post("http://localhost:1337/products", this.headers, {
+        userId: localStorage.getItem("userId")
+      });
+    },
+
+    async deleteProduct() {
+      await query._delete(`http://localhost:1337/product/delete/${this.table.selectedItem.id}`, this.headers);
+      this.delete_dialog = false;
     },
 
     async TableInitialization() {
-      const products = await this.GetProducts();
+      const products = await this.getProducts();
 
       this.table.data = products.map((item) => {
         item.name = `${item.company} ${item.fragrant}`;
@@ -68,7 +71,7 @@ export default {
     closeSellDialog() {
       this.sell_dialog = false;
     },
-    infoDialog(item) {
+    openInfoDialog(item) {
       this.table.selectedItem = item;
       this.info_dialog = true;
     },
@@ -78,21 +81,6 @@ export default {
     },
     closeDelDialog() {
       this.delete_dialog = false;
-    },
-
-    async deleteProduct() {
-      await fetch(this.urlDeleteProduct + this.table.selectedItem.id, {
-        method: "DELETE",
-      });
-      this.delete_dialog = false;
-    },
-  },
-  watch: {
-    delete_dialog: function(dialog) {
-      if (!dialog) {
-        console.log(dialog);
-        this.TableInitialization();
-      }
     },
   },
 };

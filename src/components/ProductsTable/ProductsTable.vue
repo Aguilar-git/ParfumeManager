@@ -8,21 +8,21 @@
         <v-btn @click="openSellDialog(item)" icon>
           <v-icon>mdi-cash-plus</v-icon>
         </v-btn>
-        <v-btn @click="dialog = !dialog" icon>
+<!--        <v-btn @click="dialog = !dialog" icon>
           <v-icon>mdi-pencil-outline</v-icon>
-        </v-btn>
+        </v-btn>-->
         <v-btn @click="openDelDialog(item)" icon>
           <v-icon>mdi-delete-outline</v-icon>
         </v-btn>
-        <v-btn @click="infoDialog(item)" icon>
+        <v-btn @click="openInfoDialog(item)" icon>
           <v-icon>mdi-information-outline</v-icon>
         </v-btn>
       </template>
     </v-data-table>
 
-    <v-dialog v-model="dialog" width="700">
+<!--    <v-dialog v-model="dialog" width="700">
       <v-card height="400"> </v-card>
-    </v-dialog>
+    </v-dialog>-->
 
     <!-- Sell dialog -->
     <SellDialog
@@ -40,7 +40,6 @@
     ></DeleteDialog>
 
     <!-- Info dialog -->
-
     <InfoDialog
       :item="table.selectedItem"
       :dialog="info_dialog"
