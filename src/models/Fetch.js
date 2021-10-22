@@ -22,13 +22,13 @@ export default class Fetch {
         return this.send(METHOD.DELETE, url, headers)
     }
 
-    static async send(method, url, headers, data = undefined) {
+    static async send(method, url, headers, data = null) {
         return await fetch(url, {
             method,
             headers,
-            body: data ? JSON.stringify(data) : undefined,
+            body: data ? JSON.stringify(data) : null,
         }).then((result) => result?.json())
     }
 
-}
 
+}
