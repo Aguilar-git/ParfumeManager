@@ -18,17 +18,18 @@ export default class Fetch {
         return this.send(METHOD.PUT, url, headers, body)
     }
 
-    static async _delete(url, headers) {
+    static async  _delete(url, headers) {
         return this.send(METHOD.DELETE, url, headers)
     }
 
     static async send(method, url, headers, data = undefined) {
-        return await fetch(url, {
+        return fetch(url, {
             method,
             headers,
             body: data ? JSON.stringify(data) : undefined,
-        }).then((result) => result?.json())
+        }).then(async (result) => {
+            return result.json()
+        });
     }
-
 }
 

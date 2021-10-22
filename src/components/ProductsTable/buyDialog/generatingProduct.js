@@ -1,13 +1,11 @@
+import Query from "../../../models/Fetch.js";
+
 export default {
   data() {
     return {
       dialog: false,
-      urls: {
-        Companies: "http://localhost:1337/product/companies",
-        Fragrants: "http://localhost:1337/product/fragrants",
-        MaxVolumes: "http://localhost:1337/product/max-volumes",
-        Concentrations: "http://localhost:1337/product/concentrations",
-        CreateProduct: "http://localhost:1337/product/create",
+      headers: {
+        "Content-Type": "application/json",
       },
       lists: {
         companies: [],
@@ -34,15 +32,8 @@ export default {
   },
   methods: {
     async CreateProduct() {
-      await fetch(this.urls.CreateProduct, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(this.product),
-      }).then(() => {
-        this.dialog = false;
-      });
+      await Query._post("http://localhost:1337/products/create", this.headers, this.product)
+      this.dialog = false;
       this.$emit("update-table");
     },
 
@@ -53,23 +44,16 @@ export default {
 
     async ArgumentInitialization() {
       // Компании
-      const compaies = await this.GetData(this.urls.Companies);
-      this.lists.companies = compaies.map((item) => {
+      this.lists.companies = (await Query._get("http://localhost:1337/products/companies", this.headers)).map((item) => {
         return item.companyName;
       });
-      // Ароматы
-      const fragrants = await this.GetData(this.urls.Fragrants);
-      this.lists.fragrants = fragrants.map((item) => {
+      this.lists.fragrants = (await Query._get("http://localhost:1337/products/fragrants", this.headers)).map((item) => {
         return item.fragrantName;
       });
-      // Максимальные обьёмы
-      const maxVolume = await this.GetData(this.urls.MaxVolumes);
-      this.lists.maxVolumes = maxVolume.map((item) => {
+      this.lists.maxVolumes = (await Query._get("http://localhost:1337/products/max-volumes", this.headers)).map((item) => {
         return item.volumeValue;
       });
-      // Концентрации
-      const concentration = await this.GetData(this.urls.Concentrations);
-      this.lists.concentrations = concentration.map((item) => {
+      this.lists.concentrations = (await Query._get("http://localhost:1337/products/concentrations", this.headers)).map((item) => {
         return item.concentrationName;
       });
     },

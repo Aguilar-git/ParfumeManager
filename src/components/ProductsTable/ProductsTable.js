@@ -2,10 +2,9 @@ import SellDialog from "./sellDialog/generatingSell.vue";
 import DeleteDialog from "./deleteDialog/deleteProduct.vue";
 import InfoDialog from "./infoDialog/infoAboutProduct.vue";
 import AddProduct from "./buyDialog/generatingProduct.vue";
-import query from "../../models/Fetch.js";
+import Query from "../../models/Fetch.js";
 
 export default {
-
   components: {
     AddProduct,
     InfoDialog,
@@ -34,7 +33,6 @@ export default {
       date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
           .toISOString()
           .substr(0, 10),
-      dateTimePickerMenu: false,
     };
   },
 
@@ -44,20 +42,21 @@ export default {
 
   methods: {
     async getProducts() {
-      return await query._post("http://localhost:1337/products", this.headers, {
+      return await Query._post("http://localhost:1337/products", this.headers, {
         userId: localStorage.getItem("userId")
       });
     },
 
     async deleteProduct() {
-      await query._delete(`http://localhost:1337/product/delete/${this.table.selectedItem.id}`, this.headers);
-      this.delete_dialog = false;
+      await Query._delete(`http://localhost:1337/products/delete/${this.table.selectedItem.id}`, this.headers);
+      await this.TableInitialization()
+      this.closeDelDialog();
     },
 
     async TableInitialization() {
       const products = await this.getProducts();
 
-      this.table.data = products.map((item) => {
+      this.table.data = products?.map((item) => {
         item.name = `${item.company} ${item.fragrant}`;
         item.volume = `${item.actualVolume}/${item.purchaseVolume}`;
         return item;

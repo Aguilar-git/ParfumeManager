@@ -45,35 +45,35 @@ app.post("/products", async (req, res) => {
 });
 
 // Возвращает список компаний
-app.get("/product/companies", async (req, res) => {
+app.get("/products/companies", async (req, res) => {
   const сompanies = await db.GetCompanies();
 
   res.json(сompanies);
 });
 
 // Возвращает список ароматов
-app.get("/product/fragrants", async (req, res) => {
+app.get("/products/fragrants", async (req, res) => {
   const fragrant = await db.GetFragrants();
 
   res.json(fragrant);
 });
 
 // Возвращает историю максимальных объёмов
-app.get("/product/max-volumes", async (req, res) => {
+app.get("/products/max-volumes", async (req, res) => {
   const maxVolumes = await db.GetMaxVolumes();
 
   res.json(maxVolumes);
 });
 
 // Возвращает список концентраций
-app.get("/product/concentrations", async (req, res) => {
+app.get("/products/concentrations", async (req, res) => {
   const concentrations = await db.GetConcentrations();
 
   res.json(concentrations);
 });
 
 // Добавление нового продукта
-app.post("/product/create", async (req, res) => {
+app.post("/products/create", async (req, res) => {
   try {
     const result = await db.CreateProduct(req.body);
     res.json(result);
@@ -82,10 +82,10 @@ app.post("/product/create", async (req, res) => {
   }
 });
 
-app.delete("/product/delete/:id", async (req, res) => {
+app.delete("/products/delete/:id", async (req, res) => {
   try {
     await db.DeleteProduct(req.params.id);
-    res.status(200).send();
+    res.json({status: "ok"});
   } catch (error) {
     res.status(400).send();
   }
